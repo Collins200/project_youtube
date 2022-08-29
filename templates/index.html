@@ -1,0 +1,330 @@
+{% extends 'base.html'%}
+
+
+{% block content %}
+
+<div class="container">
+  <p class="header1">Basing on the input you have given here is what we have for you....wise decisions are based on careful analysis and that is why we provide quality content analysis</p>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Tabular analysis of your defined keyword in your country expressed as a percentage</h4>
+        {% for table in tables %}
+            {{ table|safe }}
+        {% endfor %}
+    
+      </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+      <div class="card-body">
+        <b>Comparison tabular analysis of your defined keyword in other countries expressed as a percentage</b>
+        {% for tabl in table1 %}
+            {{ tabl|safe }}
+        {% endfor %}
+      </div>
+      </div>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+      <div class="card-body">
+        <!-- <h5 class="card-title">Special title treatment</h5> -->
+        <img src={{url}} alt="Chart" height="auto" width="100%">
+      </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+      <div class="card-body">
+        <img src={{url1}} alt="Chart1" height="auto" width="100%">
+      </div>
+      </div>
+    </div>
+    </div>
+</div>
+<div class="container">
+<div class="card">
+  <div class="card-body ">
+    <h5 class="card-title">General analysis and recommendation</h5>
+    <p>The average search statistics for the keyword {{word}} is : {{one}}<br>
+      The interest for the keyword {{word}} overtime has changed by {{two}}%.<br>
+    <b>Consider this before making any decision:</b></p>
+  
+    {%if four > 75 and three <= 5%}
+
+        <p>The interest for the keyword '{{word}}' is stable overtime. </p>
+
+    {%elif four > 75 and three  > 5%}
+
+        <p>The interest for the keyword '{{word}}' is stable and increasing overtime. </p>
+
+    {%elif four > 75 and three  < -5%}
+
+        <p>The interest for the keyword '{{word}}' is stable and decreasing overtime. </p>
+
+    {%elif four > 60 and three <= 15%}
+
+        <p> The interest for the keyword '{{word}}' is relatively stable overtime. </p>
+
+    {%elif four > 60 and three  > 15%}
+
+        <p> The interest for the keyword '{{word}}' is relatively stable and increasing overtime. </p>
+
+    {%elif four > 60 and three < -15%}
+
+        <p> The interest for the keyword '{{word}}' is relatively stable and decreasing overtime. </p>
+
+    {%elif four > 20 and three  <= 15%}
+
+        <p> The interest for the keyword '{{word}}' is seasonal. </p>
+
+    {%elif four > 20 and three  > 15%}
+
+        <p> The interest for the keyword '{{word}}' is trending. </p>
+
+    {%elif four > 20 and three  < -15%}
+
+        <p>The interest for the keyword '{{word}}' is significantly decreasing. </p>
+
+    {%elif four > 5 and three  <= 15%}
+
+        <p> The interest for the keyword '{{word}}' is cyclical.</p>
+
+    {%elif four > 0 and three  > 15%}
+
+        <p> The interest for the keyword '{{word}}' is new and not trending. </p>
+
+
+    {%elif four > 0 and three  < -15%}
+
+        <p>The interest for the keyword '{{word}}' is declining and not comparable to its peak.</p>
+
+    {%else%}
+
+    <p> This is something to be checked </p>
+
+    {%endif%}
+
+  </div>
+</div>
+</div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Top related searches to the keyword you have provided rated as a percentage</h5>
+          {% for table in top_related_query %}
+             {{ table|safe }}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Rising related searches to the keyword you have provided</h5>
+
+          {% for tabl in rising_related_query %}
+              {{ tabl|safe }}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <div class="geodata">
+        <img class="geo" src="{{url_for('static', filename='View.png')}}" alt="Youtube Geodata image"/>
+      
+        <div class="card-body-geo">
+          <h5 class="card-title-geo">Conclusions basing on the map:</h5>
+          <p>If your country has less number of people visiting Youtube consider creating Global content rather than local content to earn more views and subscription.</p>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container ">
+  <div class="card-popular">
+  <div class="card4 mt-2">
+
+    <b><center>Popular Youtuber's in your country and the type of content they create: </center></b>
+      {% for d in table3 %}
+        {{ d|safe }}
+      {% endfor %}
+    
+  </div>
+</div>
+</div>
+<div class="container">
+<div class="card-mt-2">
+  <div class="card-body-popular">
+    <!-- <h5 class="card-title">Conclusions basing on the table:</h5> -->
+    <b>Conclusions basing on the table: </b>
+    <p>Your country has the most popular youtuber "{{YoutuberName}}" creating "{{ContentType}}". You can as well create "{{ContentType}}" type of content</p>
+    <p>{{searchword}}</p>
+  </div>
+</div>
+</div>
+<div class="accordion" id="accordionExample">
+  <h1><center>FAQ</center></h1>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+      <div class="circle-icon"> <i class="fa fa-question"></i> </div>
+      <span>How to Create a YouTube Account?</span> </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body"> 
+        <p> 
+          1. Go to YouTube.com and click the Sign Up link.
+          <br>
+          2. Enter your e-mail address and a password.
+          <br>            
+          3. Fill in the Re-type Password and Username fields.
+          <br>
+          4. Enter your postal code.
+          <br>
+          5. Click to select your gender and enter your date of birth.
+          <br>
+          6. Type the characters (letters and numbers) from the colored box into the Word Verification field.
+          <br>
+          7. Check or uncheck the next box with the unwieldy name: Let others find my channel on YouTube if they have my email address.
+          <br>
+          8. Check the Terms of Use, Privacy Policy box after you read all the legalese.
+          <br>
+          9. Click the Create My Account button.
+        </p>
+         </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <div class="circle-icon"> <i class="fa fa-question"></i> </div>
+              <span>Is there a way of getting personalized support and guidance?</span> </button>
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+              <div class="accordion-body">Our team is always ready to bring to you personalized content.You can reach us at <a href="mailto:collinscollolel@gmail.com">Assistance desk</a> for question and any other assistance</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> 
+                <div class="circle-icon"> <i class="fa fa-question"></i> </div>
+              <span>How to upload a video to YouTube?</span> </button>
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+              <div class="accordion-body"> <p> 
+                1. Log in to your YouTube account.
+                <br>
+                2. Click on the video icon at the top right hand side of the window, which can be found next to your user icon, messages, apps, and notifications.
+                <br>            
+                3. Click ‘Upload Video.’
+                <br>
+                4. Press ‘select files to upload’ to find the video file saved on your computer. Or, you can drag and drop it into the window.
+                <br>
+                5. Add an SEO friendly title so that it’s more easily discoverable via search engines.
+                <br>
+                6. Add a description of the video so people know what your content is about before watching it.
+                <br>
+                7. Add tags, which act as tools to help the discovery of your video.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="chat-room">
+  <div class="container">
+
+  
+    <div class="row">
+     <div class="card">
+      <h2 class="card-title">Comments</h2>
+      <div class="col-md-8">
+        <div class="card mb-3" >
+          <div class="row">
+            <div class="col-md-4">
+              <img
+                src="https://mdbcdn.b-cdn.net/wp-content/uploads/2020/06/vertical.webp"
+                alt="Trendy Pants and Shoes"
+                class="img-fluid rounded-circle"
+                style="height: 100px; width: 100px;"
+              />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  This is a wider card with supporting text below as a natural lead-in to
+                  additional content. This content is a little bit longer.
+                </p>
+                <p class="card-text">
+                  <small class="text-muted">Last updated 3 mins ago</small>
+                </p>
+
+                <button class="btn btn-info">Reply</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="card-title">Post a Comment</h2>
+        <div class="card mt-2">
+         
+
+
+        </div>
+      </div>
+     </div>
+    </div>
+  </div>
+</div>
+<footer class="comment-footer-meta">
+
+ 
+   
+</footer>
+
+<script type="text/javascript">
+  function update() {
+      var select = document.getElementById('inputState');
+      var option = select.options[select.selectedIndex];
+
+      document.getElementById('text').value = option.text;
+  }
+
+  update();
+  function change() {
+      var select = document.getElementById('period');
+      var option = select.options[select.selectedIndex];
+
+      document.getElementById('text').value = option.text;
+  }
+
+  change();
+  function changing() {
+      var select = document.getElementById('searchword');
+      var option = select.options[select.selectedIndex];
+
+      document.getElementById('textt').value = option.text;
+  }
+
+  changing();
+</script>
+{% endblock %}
